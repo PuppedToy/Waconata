@@ -33,18 +33,18 @@ async function classifyTimeline(user) {
 
 async function getInspiredByTweetsFrom(users) {
     const timelines = await Promise.all(users.map(user => getTimeline(user)));
-    const commonTimeline = timelines.flat();
+    const commonTimeline = timelines.flat().filter(tweet => !tweet.includes('https://') && !tweet.includes('@'));
     shuffle(commonTimeline);
     const inspirationalTweets = commonTimeline.slice(0, 5);
     const tweet = await generateTweetFromInspiration(inspirationalTweets);
-    console.log(tweet);
+    console.log(tweet.replace(/\@/gm, '').trim());
 }
 
 async function test() {
     // await sendSampleTweet();
     // await logMyTweets();
     // await classifyTimeline();
-    // await getInspiredByTweetsFrom(['PuppedToy', 'LowkoTV', 'Zeniiet']);
+    await getInspiredByTweetsFrom(['PuppedToy', 'LowkoTV', 'Zeniiet', 'cowboyvonriegan', 'DrSJaishankar', 'jeonginloops']);
 }
 
 test();
