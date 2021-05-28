@@ -21,6 +21,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
+    "mongodb": "^3.6.9",
+    "shuffle-array": "^1.0.1",
     "twitter": "^1.7.1"
   },
   "devDependencies": {

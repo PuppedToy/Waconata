@@ -18,7 +18,7 @@ const defaults = {
     "presence_penalty": 0.6,
 };
 
-module.exports = async function(prompt, config) {
+module.exports = async function(prompt, config, append = true) {
     try {
         const request = {
             ...defaults,
@@ -29,7 +29,7 @@ module.exports = async function(prompt, config) {
         const { choices } = response.data;
         const [ { text } ] = choices;
 
-        return `${prompt}${text}`;
+        return append ? `${prompt}${text}` : text;
     }
     catch (error) {
         console.error(error.message);
