@@ -23,7 +23,7 @@ Sentiment:`;
         max_tokens: 60,
         top_p: 1.0,
         frequency_penalty: 0.5,
-        presence_penalty: 0.0,
+        presence_penalty: 0.5,
         stop: ['###'],
     };
 

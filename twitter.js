@@ -20,3 +20,38 @@ async function tweet(text) {
 }
 
 module.exports.tweet = tweet;
+
+async function follow(user) {
+    return twitterClient.post('friendships/create', {screen_name: user});
+}
+
+module.exports.follow = follow;
+
+async function unfollow(user) {
+    return twitterClient.post('friendships/destroy', {screen_name: user});
+}
+
+module.exports.unfollow = unfollow;
+
+async function readDMs() {
+    const result = await twitterClient.get('direct_messages/events/list', {});
+    const { events } = result;
+    return events;
+}
+
+module.exports.readDMs = readDMs;
+
+/* Returning 401 Unauthorized */
+async function sendDM(userId, text) {
+    return twitterClient.post('direct_messages/events/new', {
+        type: 'message_create',
+        message_create: {
+            target: {
+                recipient_id: userId,
+            },
+            message_data: { text },
+        }
+    });
+}
+
+module.exports.sendDM = sendDM;
